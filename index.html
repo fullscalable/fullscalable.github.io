@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bo Wu's Scalability Research</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+      color: #f5f6f7;
+    }
+    nav {
+      margin-right: auto;
+      margin-left: auto;
+    }
+    p {
+      font-size: 16px;
+    }
+    img {
+      max-height: 12em;
+    }
+    .margin {
+      margin-bottom: 20px;
+    }
+    .bg-1 { 
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+    }
+    .bg-2 { 
+      background-color: #474e5d; /* Dark Blue */
+      color: #ffffff;
+    }
+    .bg-3 { 
+      background-color: #ffffff; /* White */
+      color: #555555;
+    }
+    .bg-4 { 
+      background-color: #2f2f2f; /* Black Gray */
+      color: #fff;
+    }
+    .container-fluid {
+      padding-top: 35px;
+      padding-bottom: 35px;
+    }
+    .paragraph {
+      text-indent: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target=".navbar-nav">
+  <div class="bg-light fixed-top">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#home">Bo Wu's Scalability Research</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="#goals">Goals</a></li>
+            <li class="nav-item"><a class="nav-link" href="#people">People</a></li>
+            <li class="nav-item"><a class="nav-link" href="#methods">Methods</a></li>
+            <li class="nav-item"><a class="nav-link" href="#publications">Publications</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <div class="scroll-target" id="home"></div>
+
+  <div class="container-fluid bg-1">
+    <div class="scroll-target" id="goals"></div>
+    <h3 class="margin text-center">What do we do?</h3>
+    <div class="container">
+      <div class="row">
+        <div class="col-8"><p>We seek out performance bottlenecks in all levels of the software-hardware system stack and work to eliminate them. The enormous complexity of modern systems, with many performance-critical components, demands a holistic system view to achieve the best performance. When modern applications seek to use all the cores of a system, bottlenecks can appear in places where they weren't present in the sequential program. Eliminating these bottlenecks is critical for scalability, and enabling applications to achieve their maximum potential on current and future hardware.</p></div>
+        <div class="col-4 h-100 my-auto"><img src="assets/Nvidia-Feature-768x424.jpg" class="img-fluid" alt="GPU image"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid bg-2">
+    <div class="scroll-target" id="people"></div>
+    <h3 class="margin text-center">Who are we?</h3>
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <img src="assets/Bo.png" class="img-fluid" alt="image of Bo Wu">
+          <p>Bo Wu <br>
+          Professor <br>
+          Colorado School of Mines</p>
+        </div>
+        <div class="col text-center">
+          <img src="assets/Daniel.png" class="img-fluid" alt="image of Daniel Mawhirter">
+          <p>Daniel Mawhirter <br>
+          PhD Candidate <br>
+          Colorado School of Mines</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid bg-3">
+    <div class="scroll-target" id="methods"></div>
+    <h3 class="margin text-center">How do we do it?</h3>
+    <div class="container">
+      <p class="text-center">Many scalability problems can manifest in a complex system. The most important ones typically fall into a few categories:</p>
+      <div class="row">
+        <div class="col">
+          <h5 class="text-center">Synchronization</h5>
+          <p>Parallel instruction streams must synchronize sometimes in order to communicate. But synchronizing too much can introduce substantial performance problems that grow larger as the number of cores/processors increases. Eliminating synchronization wherever possible can substantially improve performance by decreasing idle time and communication pressure.</p>
+        </div>
+        <div class="col">
+          <h5 class="text-center">Computation-Communication Overlapping</h5>
+          <p>Most expensive computations require large amounts of data. Moving this data around can bottleneck the computation if it is on the critical path, or too slow to keep up with the cores/processors. The more communication time can be overlapped with computation time, the less of a bottleneck it becomes, and the closer performance can come to theoretical peaks.</p>
+        </div>
+        <div class="col">
+          <h5 class="text-center">Load Balance</h5>
+          <p>When many processors are working on a problem, they need to be working on the problem for similar amounts of time. Any difference in that time is wasted on the processors that finish early, and the effective parallelism goes down toward the end of a computation. Purely-dynamic approaches to load balancing are costly, as they typically operate on shared work queues. But distributed approaches are also possible.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid bg-4">
+    <div class="scroll-target" id="publications"></div>
+    <h3 class="margin text-center">What have we accomplished?</h3>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h5 class="text-center">[ICS 2019] Laius: Towards Latency Awareness and Improved Utilization of Spatial Multitasking Accelerators in Datacenters</h5>
+          <p class="text-center">Wei Zhang (Shanghai Jiao Tong University),
+            Weihao Cui (Shanghai Jiao Tong University), 
+            Kaihua Fu (Shanghai Jiao Tong University),
+            Quan Chen (Shanghai Jiao Tong University),
+            Bo Wu (Colorado School of Mines),
+            Daniel Edward Mawhirter (Colorado School of Mines),
+            Chao Li (Shanghai Jiao Tong University),
+            Minyi Guo (Shanghai Jiao Tong University)</p>
+          <p class="paragraph">Datacenters use accelerators to provide the significant compute requirement required by emerging user-facing services. The diurnal user access pattern of user-facing services provides a strong incentive to co-located applications for better accelerator utilization, and prior work has focused on enabling co-location on multicore processors and traditional non-preemptive accelerators. However, current accelerators are evolving towards spatial multitasking and introduces a new set of challenges to eliminate QoS violation. To address this open problem, we explore the underlying causes of QoS violations on spatial multitasking Accelerators. In response to these causes, we propose Laius, a runtime system that carefully allocates the computation resource to co-located applications for maximizing the throughput of batch applications while guaranteeing that user-facing services achieve the required QoS. Our evaluation on a Nvidia RTX 2080Ti GPU shows that Laius improves the utilization of spatial multitasking accelerators by 20.8%, while achieving the 99%-ile latency target for user-facing services.</p>
+        </div>
+        <div class="col">
+          <h5 class="text-center">[SOSP 2019] AutoMine: Harmonizing High-Level Abstraction and High Performance for Graph Mining</h5>
+          <p class="text-center">Daniel Mawhirter (Colorado School of Mines),
+            Bo Wu (Colorado School of Mines)</p>
+          <p class="paragraph">Graph mining algorithms that aim at identifying structural patterns of graphs are typically more complex than graph computation algorithms such as breadth first search. Researchers have implemented several systems with high-level and flexible interfaces customized for tackling graph mining problems. However, we find that for triangle counting, one of the simplest graph mining problems, such systems can be several times slower than a single-threaded implementation of a straightforward algorithm.</p>
+          <p class="paragraph">In this paper, we reveal the root causes of the severe inefficiencies of state-of-the-art graph mining systems and the challenges to address the performance problems. We build AutoMine, a single-machine system to provide both high-level interfaces and high performance for large-scale graph mining applications. The novelty of AutoMine comes from 1) a novel representation of the instances of subgraph patterns and 2) a set of compilation techniques that automatically generate efficient mining code with minimized memory consumption from a high-level abstraction. We have extensively evaluated AutoMine against 3 graph mining systems on 8 real-world graphs of different scales. Our experimental results show that AutoMine often produces several orders of magnitude better performance and can process very large graphs existing systems cannot handle.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(window).resize(function() {
+      $('body').css('padding-top', $('nav').outerHeight());
+      size = $('nav').outerHeight() + 35;
+      $('.scroll-target').css('margin-top', -1 * size);
+      $('.scroll-target').css('margin-bottom', size);
+    });
+    $(window).ready(function() {
+      $('body').css('padding-top', $('nav').outerHeight());
+      size = $('nav').outerHeight() + 35;
+      $('.scroll-target').css('margin-top', -1 * size);
+      $('.scroll-target').css('margin-bottom', size);
+    });
+  </script>
+</body>
+</html>
